@@ -1,4 +1,4 @@
-package com.zw.entity;
+package com.zw.permission.entity;
 
 /**
  * Created by Administrator on 2017/5/2.

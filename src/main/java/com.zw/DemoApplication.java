@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan   //扫描Servlet
-@MapperScan("com.zw.mapper")//这里mapper是你的mybatis的mapper目录。
+@MapperScan("com.zw.**.dao")//这里mapper是你的mybatis的mapper(dao)目录。
 public class DemoApplication {
 
 	public static void main(String[] args) {

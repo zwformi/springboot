@@ -1,7 +1,7 @@
-package com.zw.controller;
+package com.zw.permission.controller;
 
-import com.zw.dao.UserDao;
-import com.zw.entity.User;
+import com.zw.permission.entity.User;
+import com.zw.permission.service.UserService;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,15 +19,14 @@ import java.util.Date;
 @EnableAutoConfiguration
 public class HelloController {
     @Resource
-    private UserDao UserDao;
-
+    private UserService userService;
     @RequestMapping("/test")
-    String test1(){
+    public String test1(){
         return "hello,I'm test1()";
     }
     @RequestMapping("/findUser")
-    User findUser(@RequestParam String id){
-        return UserDao.getUser(Integer.valueOf(id));
+    public User findUser(@RequestParam String id){
+        return userService.findById(Integer.valueOf(id));
     }
 
     @RequestMapping("/now")
