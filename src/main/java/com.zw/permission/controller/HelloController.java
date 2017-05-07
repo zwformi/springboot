@@ -25,8 +25,8 @@ public class HelloController {
         return "hello,I'm test1()";
     }
     @RequestMapping("/findUser")
-    public User findUser(@RequestParam String id){
-        return userService.findById(Integer.valueOf(id));
+    public String findUser(@RequestParam String id){
+        return userService.findById(Integer.valueOf(id)).toString();
     }
 
     @RequestMapping("/now")

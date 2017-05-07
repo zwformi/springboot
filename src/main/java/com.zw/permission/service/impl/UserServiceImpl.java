@@ -16,6 +16,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Override
     public User findById(int id) {
-        return this.userDao.findById(id);
+          return this.userDao.findById(id);
+       // return this.userDao.selectByPrimaryKey(id);
     }
 }

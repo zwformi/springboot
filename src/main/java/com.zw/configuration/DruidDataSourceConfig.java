@@ -5,6 +5,7 @@ import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -42,7 +43,13 @@ public class DruidDataSourceConfig implements EnvironmentAware {
         datasource.setDriverClassName(propertyResolver.getProperty("driver-class-name"));
         datasource.setUsername(propertyResolver.getProperty("username"));
         datasource.setPassword(propertyResolver.getProperty("password"));
+        System.out.println("============start=============");
+        System.out.println(propertyResolver.getProperty("password"));
+
         datasource.setInitialSize(Integer.valueOf(propertyResolver.getProperty("initialSize")));
+        System.out.println(propertyResolver.getProperty("initialSize"));
+        System.out.println("=============end============");
+
         datasource.setMinIdle(Integer.valueOf(propertyResolver.getProperty("minIdle")));
         datasource.setMaxWait(Long.valueOf(propertyResolver.getProperty("maxWait")));
         datasource.setMaxActive(Integer.valueOf(propertyResolver.getProperty("maxActive")));
@@ -72,12 +79,12 @@ public class DruidDataSourceConfig implements EnvironmentAware {
         return servletRegistrationBean;
     }
 
-    @Bean
+   @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
         filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*");
+        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid*//**//*");
         return filterRegistrationBean;
     }
 
@@ -100,6 +107,6 @@ public class DruidDataSourceConfig implements EnvironmentAware {
 
     @Override
     public void setEnvironment(Environment env) {
-        this.propertyResolver = new RelaxedPropertyResolver(env, "spring.datasource.");
+        this.propertyResolver = new RelaxedPropertyResolver(env, "spring.datasource");
     }
 }
